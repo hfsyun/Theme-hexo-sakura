@@ -1,0 +1,18 @@
+{% extends '_layout.njk' %}
+
+
+{% block title %}{{ page.title }} | {{ title }}{% endblock %}
+
+
+
+{% block class %}posts posts-expand{% endblock %}
+
+
+
+
+{% block content %}
+
+  {% set post = page %}
+  {% include '_macro/post.njk' %}
+
+{% endblock %}

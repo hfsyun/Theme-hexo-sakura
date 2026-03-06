@@ -1,0 +1,44 @@
+  - group: "个人服务"
+    items:
+      - name: "语雀"
+        url: "https://www.yuque.com/hfsyun"
+        desc: "博客写作平台"
+      
+      - name: "hexo-yuque"
+        url: "https://github.com/x-cold/yuque-hexo"
+        desc: "同步语雀知识库的文章到Hexo博客,支持私人知识库"
+      
+      - name: "Elog"
+        url: "https://github.com/LetTTGACO/elog"
+        desc: "Markdown 批量导出工具、开放式跨平台博客解决方案，随意组合写作平台(语雀/Notion/FlowUs/飞书/我来Wolai)和博客平台(Hexo/Vitepress/Halo/Confluence/WordPress等)"      
+      
+      - name: "PicGo"
+        url: "https://github.com/Molunerfinn/PicGo"
+        desc: "一个用于快速上传图片并获取图片 URL 链接的工具"
+      
+      - name: "今日诗词"
+        url: "https://www.jinrishici.com/"
+        desc: "今日诗词api"    
+      
+      - name: "favicon"
+        url: "https://jinaconvert.com/cn/"
+        desc: "图片转换成多种图片格式"
+      
+      - name: "LeanCloud"
+        url: "https://www.leancloud.cn/"
+        desc: "LeanCloud国内版"                
+
+        
+  - group: "主题相关"
+    items:
+      - name: "Hexo"
+        url: "https://hexo.io/zh-cn/index.html"
+        desc: "快速、简洁且高效的博客框架"
+      
+      - name: "Hexo-Theme-Next"
+        url: "https://github.com/next-theme/hexo-theme-next"
+        desc: "Elegant and powerful theme for Hexo"
+     
+      - name: "Hexo-Theme-Sakura"
+        url: "https://github.com/honjun/hexo-theme-sakura"
+        desc: "A beautiful theme"        

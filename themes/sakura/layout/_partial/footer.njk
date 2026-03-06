@@ -1,0 +1,114 @@
+
+<footer id="colophon" class="site-footer" role="contentinfo">
+  <div class="site-info">
+    <div class="footer-device">
+    <p style="font-family: 'Ubuntu', sans-serif;">
+      {%- set copyright_year = date(null, 'YYYY') %}
+  &copy; {% if theme.footer.since and theme.footer.since != copyright_year %}{{ theme.footer.since }} – {% endif %}
+  <span itemprop="copyrightYear">{{ copyright_year }}</span>
+        <span style="color: #b9b9b9;">Theme <a href="https://github.com/honjun/hexo-theme-sakura" target="_blank" style="color: #b9b9b9;;text-decoration: underline dotted rgba(0, 0, 0, .1);">Sakura</a> <i class="iconfont icon-sakura rotating" style="color: #ffc0cb;display:inline-block"></i> by <a href="https://2heng.xin/" target="_blank" style="color: #b9b9b9;;text-decoration: underline dotted rgba(0, 0, 0, .1);">Mashiro</a>&<a href="https://www.hojun.cn/" target="_blank" style="color: #b9b9b9;;text-decoration: underline dotted rgba(0, 0, 0, .1);">Hojun</a>, Powered by Hexo, Hosted by Coding Pages</a>
+        </span>
+      </p>
+    </div>
+  </div><!-- .site-info -->
+</footer>
+
+
+
+{#
+<script src="/js/tocbot.js"></script> 
+<script type="text/javascript" src="/js/lib.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha512-+NqPlbbtM1QqiK8ZAo4Yrj2c4lNQoGv8P79DPtKzj++l5jnN39rHA/xsqn8zE9l0uSoxaCdrOgFs6yjyfbBxSg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.pjax/2.0.1/jquery.pjax.min.js" integrity="sha512-7G7ueVi8m7Ldo2APeWMCoGjs4EjXDhJ20DrPglDQqy8fnxsFQZeJNtuQlTT0xoBQJzWRFp4+ikyMdzDOcW36kQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+<script src="https://fastly.jsdelivr.net/npm/lazyload@2.0.0-rc.2/lazyload.js"></script>
+
+<script type="text/javascript" src="/js/tocbot.js"></script>
+<script type="text/javascript" src="/js/social_share.js"></script>
+#}
+
+<div>
+
+{%- for name in theme.scripts %}
+ <script type="text/javascript" src="{{ name }}"></script>
+{%- endfor %}
+</div>
+
+
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script> -->
+<script type="text/javascript">
+/* <![CDATA[ */
+if (/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+  var Poi = {"pjax":"{{ theme.pjax }}","movies":{"url": "{{ theme.movies.url }}","name":"{{ theme.movies.name }}","live":"close"},"windowheight":"fixed","codelamp":"close","ajaxurl":"","order":"asc","formpostion":"bottom"};
+} else {
+  var Poi = {"pjax":"{{ theme.pjax }}","movies":{"url": "{{ theme.movies.url }}","name":"{{ theme.movies.name }}","live":"open"},"windowheight":"auto","codelamp":"close","ajaxurl":"","order":"asc","formpostion":"bottom"};
+}
+/* ]]> */
+
+</script>
+<script>
+$(document).ready(function() {
+  if ($(".toc").length > 0 && document.body.clientWidth > 1200) {
+    if ($(".pattern-center").length > 0) { //有图的情况
+      tocbot.init({
+          // Where to render the table of contents.
+          tocSelector: '.toc', // 放置目录的容器
+          // Where to grab the headings to build the table of contents.
+          contentSelector: '.entry-content', // 正文内容所在
+          // Which headings to grab inside of the contentSelector element.
+          scrollSmooth: true,
+          headingSelector: 'h1, h2, h3, h4, h5', // 需要索引的标题级别
+          headingsOffset: -400,
+          scrollSmoothOffset: -85
+      });
+    } else {
+      tocbot.init({
+          // Where to render the table of contents.
+          tocSelector: '.toc', // 放置目录的容器
+          // Where to grab the headings to build the table of contents.
+          contentSelector: '.entry-content', // 正文内容所在
+          // Which headings to grab inside of the contentSelector element.
+          scrollSmooth: true,
+          headingSelector: 'h1, h2, h3, h4, h5', // 需要索引的标题级别
+          headingsOffset: -85,
+          scrollSmoothOffset: -85
+      });
+    }
+    var offsetTop = $('.toc').offset().top - 95;
+    window.onscroll = function() {
+      var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+      if (scrollTop >= offsetTop) {
+        $('.toc').addClass('toc-fixed');
+      } else {
+        $('.toc').removeClass('toc-fixed');
+      }
+    }
+  }
+});
+</script>
+
+
+{#
+  添加嘉然 Live2D 看板娘
+
+#}
+{% if theme.live2d %}
+<div id="live2d">
+<script src="https://cdn.jsdmirror.com/gh/hfsyun/live2d@8f37cf0/lib/TweenLite.js"></script>
+<script src="https://cdn.jsdmirror.com/gh/hfsyun/live2d@8f37cf0/lib/live2dcubismcore.min.js"></script>
+<script src="https://cdn.jsdmirror.com/gh/hfsyun/live2d@8f37cf0/lib/pixi.min.js"></script>
+<script src="https://cdn.jsdmirror.com/gh/hfsyun/live2d@8f37cf0/lib/cubism4.min.js"></script>
+<link href="https://cdn.jsdmirror.com/gh/hfsyun/live2d@8f37cf0/lib/pio.min.css" rel="stylesheet" type="text/css"/>
+<script src="https://cdn.jsdmirror.com/gh/hfsyun/live2d@8f37cf0/lib/pio.min.js"></script>
+<script src="https://cdn.jsdmirror.com/gh/hfsyun/live2d@8f37cf0/lib/pio_sdk4.js"></script>
+<script src="https://cdn.jsdmirror.com/gh/hfsyun/live2d@8f37cf0/lib/load.js"></script>
+</div>
+{% endif %}
+

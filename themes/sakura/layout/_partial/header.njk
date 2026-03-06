@@ -1,0 +1,78 @@
+<header class="site-header no-select" role="banner">
+    <div id="show-nav" class="showNav mobile-fit">
+      <div class="line line1">
+      </div>
+      <div class="line line2">
+      </div>
+      <div class="line line3">
+      </div>
+    </div>
+
+    <div class="site-branding">
+      <span class="site-title">
+        <span class="logolink moe-mashiro">
+          <a href="/">
+            <span class="sakurasono">{{ theme.prefixName }}</span>
+          </a>
+        </span>
+      </span>
+    </div>
+
+<div class="nav-search-wrapper" style="transition: 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); overflow: unset;">
+            <!-- Nav menu -->
+                   <nav class="mobile-fit-control">
+          <ul id="menu-new" class="menu">
+            {% for key, menu in theme.menus %}
+              <li>
+                <a href="{{ url_for(menu.path) }}">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa {{ menu.fa }}" aria-hidden="true"></i>
+                    {{ key }}
+                  </span>
+                </a>
+                {% if menu.submenus %}
+                  <ul class="sub-menu">
+                    {% for subkey, submenu in menu.submenus %}
+                      <li>
+                        <a href="{{ url_for(submenu.path) }}">
+                          <i class="fa {{ submenu.fa }}" aria-hidden="true"></i>
+                          {{ subkey }}
+                        </a>
+                      </li>
+                    {% endfor %}
+                  </ul>
+                {% endif %}
+              </li>
+            {% endfor %}
+          </ul>
+        </nav>
+
+            <!-- Search and background switch -->
+                            <div class="nav-search-divider" style="transform: translateX(0px); transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); opacity: 1;"></div>
+            
+                            <div class="searchbox js-toggle-search search-form-submit" style="transform: translateX(0px); transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);">
+                    <i class="iconfont js-toggle-search iconsearch icon-search"></i>
+                    <span class="screen-reader-text">
+                        搜索                    </span>
+                </div>
+            
+                    </div>
+
+
+
+
+
+
+
+
+
+<div class="user-menu-wrapper">
+                      <div class="header-user-avatar">
+        <a href="/">
+                      <img alt="header_user_avatar" src="{{ theme.avatar }}" width="35" height="35">
+                  </a>
+      </div>
+                </div>
+
+
+</header>

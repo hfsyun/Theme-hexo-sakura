@@ -1,0 +1,46 @@
+<article class="post post-list-thumb post-list-show" itemscope="" itemtype="http://schema.org/BlogPosting">
+                <div class="post-thumb">
+                    <a href="{{ url_for(post.path) }}">
+                        <img alt="post_img" class="lazyload" src="{{ theme.lazyloadImg }}" data-src="{{ post.covers | default(_cover(post)) }}">                    </a>
+                </div><!-- thumbnail-->
+                <div class="post-date">
+                    <i class="iconfont icon-time"></i>发布于{{ date(post.date, 'YYYY-M-D') }}                                    </div>
+                <div class="post-meta">
+                    <span class="meta-author"><a href="/"><img alt="{{ theme.author }}" src="{{ theme.avatar }}"  class="avatar avatar-16 photo avatar" height="16" width="16" decoding="async"></a><a rel="author" title="{{ theme.author }}" href="/">{{ theme.author }}</a></span>
+                    {% if post.categories and post.categories.length  %}
+                    <span>   
+                     <i class="iconfont icon-file"></i>
+                {%- for cat in post.categories.toArray() %}
+          <a href="{{ url_for(cat.path) }}" itemprop="url" rel="index"><span  itemprop="name">{{ cat.name }}</span></a>
+        {%- set cat_length = post.categories.length %}
+        {%- if cat_length > 1 and loop.index !== cat_length %}
+          {{ __('symbol.comma') }}
+        {%- endif %}
+      {%- endfor %}
+      
+      </span> 
+          
+          
+          
+          
+          
+          <em>·</em>
+          {% endif %} 
+          
+          
+          <span><i class="fa-regular fa-pen-to-square"></i>{{ symbolsCount(post) }}字</span>              </div>
+                                <div class="post-title">
+                    <a href="{{ url_for(post.path) }}">
+                        <h3>{{ post.title }}</h3>
+                    </a>
+                </div>
+                <div class="post-excerpt">
+                                            <div class="ai-excerpt-tip"><i class="fa-solid fa-atom"></i>摘要</div>
+                                                                 {%- if post.description   %}     
+          {{ post.description }}
+   {% elif  theme.auto_excerpt.enable  %}
+         {% set content = post.content | striptags %}    
+          {{ content.substring(0, theme.auto_excerpt.length) }}
+            {% if content.length > theme.auto_excerpt.length %}...{% endif %}
+      {%- endif %}           </div>
+            </article>

@@ -1,0 +1,64 @@
+ 
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0, viewport-fit=cover">
+<meta http-equiv="x-dns-prefetch-control" content="on">
+<link rel="dns-prefetch" href="//cdn.jsdmirror.com">
+  
+  <link rel="dns-prefetch" href="//fastly.jsdelivr.net">
+
+ 
+{%- if theme.referrer %}
+<meta name="referrer" content="no-referrer"/>
+{%- endif %}
+<meta name="author" content="{{- theme.author }}">
+<meta name="subtitle" content="{{- theme.subtitle}}">
+<meta name="description" content="{{- theme.description}}">
+<meta name="keywords" content="{{- theme.keywords}}">
+<meta name="generator" content="Hexo 7.3.0">
+
+{%- if theme.favicon %}
+  <link rel="icon" type="image/png" sizes="180x180" href="{{ url_for(theme.favicon) }}">
+{%- endif %}
+  
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+SerifMerriweather|Merriweather+Sans|Source+Code+Pro|Ubuntu:400,700|Noto+Serif+SC" media="all">
+<link rel="stylesheet" href="//s1.hdslb.com/bfs/static/jinkela/long/fonts/harmonyos.css" media="all" onload="this.media='all'">
+
+
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+{%- if theme.style %}
+{%- for name in theme.style %}
+  <link rel="stylesheet" href="{{ name }}" >
+{%- endfor %}
+{%- endif %}
+
+
+{% include '_partial/config.njk' %}
+
+{%- set canonical = url | replace(r/index\.html$/, '') %}
+{%- if not config.permalink.endsWith('.html') %}
+  {%- set canonical = canonical | replace(r/\.html$/, '') %}
+{%- endif %}
+<link rel="canonical" href="{{ canonical }}">
+
+
+  <script type="text/javascript">
+  var bg = "{{ theme.bg }}".split(",");
+  var bgindex = Math.floor(Math.random()*bg.length);
+  if (!!window.ActiveXObject || "ActiveXObject" in window) { //is IE?
+    alert('朋友，IE浏览器未适配哦~');
+  }
+  </script>
+  <style type="text/css">
+  .hljs-ln{border-collapse:collapse}.hljs-ln td{padding:0}.hljs-ln-n:before{content:attr(data-line-number)}
+  </style>
+  <style type="text/css">.site-top .lower nav{display:block !important;}.author-profile i,.post-like a,.post-share .show-share,.sub-text,.we-info a,span.sitename,.post-more i:hover,#pagination a:hover,.post-content a:hover,.float-content i:hover{color:#FE9600}.feature i,.download,.navigator i:hover,.links ul li:before,.ar-time i,span.ar-circle,.object,.comment .comment-reply-link,.siren-checkbox-radio:checked + .siren-checkbox-radioInput:after{background:#FE9600}::-webkit-scrollbar-thumb{background:#FE9600}.download,.navigator i:hover,.link-title,.links ul li:hover,#pagination a:hover,.comment-respond input[type='submit']:hover{border-color:#FE9600}.entry-content a:hover,.site-info a:hover,.comment h4 a,#comments-navi a.prev,#comments-navi a.next,.comment h4 a:hover,.site-top ul li a:hover,.entry-title a:hover,#archives-temp h3,span.page-numbers.current,.sorry li a:hover,.site-title a:hover,i.iconfont.js-toggle-search.iconsearch:hover,.comment-respond input[type='submit']:hover{color:#FE9600}.comments .comments-main{display:block !important;}.comments .comments-hidden{display:none !important;}background-position:center center;background-attachment:inherit;}
+  </style>
+

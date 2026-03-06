@@ -1,0 +1,36 @@
+<div class="headertop {{ theme.bgclass }}">
+  <figure id="centerbg" class="centerbg">
+    <div class="focusinfo no-select">
+      <div class="header-tou">
+        <a href="{{ theme.url }}">
+          <img src="{{ theme.avatar }}">
+         {#<img src="{{ (theme.cdn or '') + theme.avatar }}">#}
+        </a>
+      </div>
+      <div class="header-info">
+        <p>{{ theme.description }}</p>
+      </div>
+              <div class="top-social">
+          {% if theme.social %}
+            {% for key, value in theme.social %}
+                <li>
+                  <a href="{{ value.url }}" target="_blank" class="social-github" title="{{ key }}">
+                    <i class="{{ value.fa }}" aria-hidden="true"></i>
+                  </a>
+                </li>
+            {% endfor %}
+          {% endif %}
+        </div>
+    </div>
+  </figure>
+  <div id="video-container" style="">
+    <video style="object-fit: fill" id="bgvideo" class="video" video-name="" src="" width="auto" preload="auto">
+    </video>
+    <div id="video-btn" class="loadvideo videolive">
+    </div>
+    <div id="video-add">
+    </div>
+    <div class="video-stu">
+    </div>
+  </div>
+</div>

@@ -1,0 +1,44 @@
+{% extends '_layout.njk' %}
+
+
+{% block title %}
+  {%- set page_title_suffix = ' | ' + theme.description %}
+    {{- theme.title + page_title_suffix }}
+{% endblock %}
+
+{% block class %}index-item  homePage posts-expand{% endblock %}
+
+{% block content %}
+
+<div class="blank" style="padding-top: 0px;"></div>
+<div id="content" class="site-content">
+{%- if theme.notice %}
+  <div class="notice" style="margin-top:60px">
+    <i class="iconfont icon-notification">
+    </i>
+    <div class="notice-content">{{ theme.notice }}</div>
+  </div>
+   {%- endif %}
+
+
+
+  <div id="primary" class="content-area">
+    <main id="main" class="site-main" role="main">
+      <h1 class="main-title" style="font-family: 'Ubuntu', sans-serif;">
+      <i class="fa fa-envira" aria-hidden="true"></i>
+      Discovery</h1>
+
+         {% for post in page.posts.toArray() %}
+
+           {% include '_macro/index-item.njk' %}  
+  {%- endfor %}
+      
+    </main>
+
+  </div>
+   {%- if page.total > 1 and page.next_link %}
+
+    <div id="pagination"><a href="{{ url_for(page.next_link) }}" class="">Previous</a></div>
+    {%- endif %}
+</div>
+{% endblock %}

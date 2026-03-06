@@ -1,0 +1,186 @@
+{% if post.photos and post.photos.length %}
+  <div class="pattern-center single-center">
+    <!-- 有配图默认渲染第一张 -->
+    <div class="pattern-attachment-img lazyload" style="background-image: url({{ post.photos[0] }});" src="{{ theme.lazyloadImg }}" data-src="{{ post.photos[0] }}">
+    </div>
+    <header class="pattern-header single-header">
+      <h1 class="entry-title">
+      {{ post.title }}</h1>
+      <p class="entry-census">
+        <span>
+          <a href="/">
+            <img src="{{ theme.avatar }}">
+          </a>
+        </span>
+        <span>
+          <a href="/">{{ theme.author }}</a>
+        </span>
+        <span class="bull">
+        ·</span>
+        {{ date(post.date, 'YYYY-M-D') }}<span class="bull">
+        ·</span>
+      <span id="busuanzi_value_page_pv"></span>次阅读</p>
+    </header>
+  </div>
+      {% else %}
+<div class="blank"></div>
+{% endif %}
+
+
+
+
+<div id="content" class="site-content">
+  <div id="primary" class="content-area">
+    <main id="main" class="site-main" role="main">
+      <article id="post-1" class="post-1 post type-post status-publish format-standard has-post-thumbnail hentry category-uncategorized">
+        <div class="toc"></div>
+        <!--<div class="toc-entry-content"><!-- 套嵌目录使用（主要为了支援评论）-->
+        {% if not post.photos[0] %}
+          <header class="entry-header">
+            <h1 class="entry-title">{{ post.title }}</h1>
+            <p class="entry-census">{{ theme.author }}&nbsp;·&nbsp;{{ date(post.date, 'YYYY-M-D') }}&nbsp;·&nbsp;
+
+             {% if post.categories and post.categories.length  %}
+              <span>
+       {%- for cat in post.categories.toArray() %}
+          <a href="{{ url_for(cat.path) }}" itemprop="url" rel="index"><span  itemprop="name">{{ cat.name }}</span></a>
+        {%- set cat_length = post.categories.length %}
+        {%- if cat_length > 1 and loop.index !== cat_length %}
+          {{ __('symbol.comma') }}
+        {%- endif %}
+      {%- endfor %} 
+      </span>
+       &nbsp;·&nbsp;
+      {% endif %}
+        <span>{{ symbolsCount(post) }}字</span> &nbsp;·&nbsp;    
+            <span id="busuanzi_value_page_pv"></span>次阅读</p></p>
+            <hr>
+          </header>
+        {% endif %}
+        <div class="entry-content">
+          {{ post.content | safe }}
+        </div>
+        <!-- .entry-content -->
+
+        <div style="text-align:center; width: 100%" class="social-share share-mobile" data-disabled="diandian, tencent"></div>
+        <footer class="post-footer">
+        {#
+          <div class="post-lincenses"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow"><i class="fa fa-creative-commons" aria-hidden="true"></i> 知识共享署名 - 非商业性使用 - 相同方式共享 4.0 国际许可协议</a></div>
+          <div class="post-tags">
+          </div>#}
+
+          {##分享
+          <div class="post-share">
+            <div class="social-share sharehidden share-component"></div>
+            <i class="iconfont show-share icon-forward"></i>
+          </div>#}
+
+
+
+
+<a class="post-license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh_CN" target="_blank" rel="nofollow" title="此文章遵守 CC BY-NC-SA 4.0 知识共享许可协议">
+                <i class="fa-brands fa-creative-commons"></i>
+                <i class="fa-brands fa-creative-commons-by"></i><i class="fa-brands fa-creative-commons-nc"></i><i class="fa-brands fa-creative-commons-sa"></i>            </a>
+
+
+
+
+
+<div class="info" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            <a href="{{ theme.url }}" class="profile gravatar">
+                <img class="fa-spin" style="--fa-animation-duration: 15s;" src="{{ theme.avatar }}" itemprop="image" alt="{{ theme.author }}" height="30" width="30">
+            </a>
+        </div>
+
+
+<div class="meta">
+            <a href="{{ theme.url }}" itemprop="url" rel="author">{{ theme.author }}</a>
+        </div>
+
+
+
+<div class="post-modified-time">
+            <i class="fa-solid fa-calendar-day" aria-hidden="true"></i>最后更新于<span  itemprop="dateModified" datetime="{{ moment(post.updated).format() }}">{{ date(post.updated) }}</span>        </div>
+
+
+ {%- if post.tags and post.tags.length %}
+<div class="post-tags">
+            <i class="fa-solid fa-tag" aria-hidden="true"></i> 
+
+            {%- for tag in post.tags.toArray() %}
+            <a href="{{ url_for(tag.path) }}" rel="tag"> #{{ tag.name }}</a>
+            {%- endfor %}
+     
+             </div>
+              {%- endif %}  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </footer><!-- .entry-footer -->
+      </article>
+      <!-- #post-## -->
+      <div class="toc" style="background: none;"></div>
+      <section class="post-squares nextprev">
+        {% if post.prev %}
+          {% if post.next %}
+            <div class="post-nepre half previous">
+          {% else %}
+            <div class="post-nepre full previous">
+          {% endif %}
+            <a href="{{ url_for(post.prev.path) }}" rel="prev">
+              <div class="background">
+                <img class="lazyload" src="{{ theme.lazyloadImg }}" data-src="{{ post.prev.covers[0] | default(_cover(post)) }}" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="{{ post.prev.covers[0] | default(_cover(post)) }}">
+              </div>
+              <span class="label">
+              Previous Post</span>
+              <div class="info">
+                <h3>
+                {{ post.prev.title }}</h3>
+                <hr>
+              </div>
+            </a>
+          </div>
+        {% endif %}
+        {% if post.next %}
+          {% if post.prev %}
+            <div class="post-nepre half next">
+          {% else %}
+            <div class="post-nepre full next">
+          {% endif %}
+            <a href="{{ url_for(post.next.path) }}" rel="next">
+              <div class="background">
+                <img class="lazyload" src="{{ theme.lazyloadImg }}" data-src="{{ post.next.covers[0] | default(_cover(post)) }}" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="{{ post.next.covers[0] | default(_cover(post)) }}">
+              </div>
+              <span class="label">
+              Next Post</span>
+              <div class="info">
+                <h3>
+                {{ post.next.title }}</h3>
+                <hr>
+              </div>
+            </a>
+          </div>
+        {% endif %}
+      </section>
+    
+    </main>
+  </div>
+</div>
+
+{% if post.mathjax %}
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=TeX-MML-AM_CHTML"></script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+  </script>
+{% endif %}

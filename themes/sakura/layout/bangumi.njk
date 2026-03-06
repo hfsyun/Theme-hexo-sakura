@@ -1,0 +1,62 @@
+{% extends '_layout.njk' %}
+
+
+{% block title %}
+  {%- set page_title_suffix = ' | ' + theme.description %}
+    {{- theme.title + page_title_suffix }}
+{% endblock %}
+
+{% block class %}bangumi{% endblock %}
+
+{% block content %}
+
+  {% if page.photos and page.photos.length %}
+    <div class="pattern-center ">
+      <div class="pattern-attachment-img">
+        <img src="{{ theme.lazyloadImg }}" data-src="{{ page.photos }}" class="lazyload" onerror="imgError(this,3)" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;">
+      </div>
+      <header class="pattern-header ">
+        <h1 class="entry-title">
+        {{ page.keywords }}</h1>
+      </header>
+    </div>
+    {% else %}
+<div class="blank"></div>
+  {% endif %}
+
+
+
+<div id="content" class="site-content">
+    <div id="primary" class="content-area">
+     <main id="main" class="site-main" role="main">
+ <header class="page-header"><h1 class="cat-title">{{  page.keywords }}</h1> <span class="cat-des"> </span></header>
+<div class="bangumi-rank">
+  <div class="bangumi-rank-tabs">
+    <button class="bangumi-rank-tab active" data-type="anime">动画</button>
+    <button class="bangumi-rank-tab" data-type="game">游戏</button>
+    <button class="bangumi-rank-tab" data-type="real">三次元</button>
+  </div>
+
+  <div class="bangumi-status-tabs">
+    <button class="bangumi-status-tab" data-status="all">全部</button>
+    <button class="bangumi-status-tab" data-status="wantWatch">想看</button>
+    <button class="bangumi-status-tab active" data-status="watched">在看</button>
+    <button class="bangumi-status-tab" data-status="watching">看过</button>
+  </div>
+
+  <h2 id="bangumi-rank-title">动画排行榜</h2>
+  <div class="bangumi-rank-list" id="bangumi-rank-list"></div>
+
+  
+  <div class="bangumi-pagination" id="bangumi-pagination">
+    <button id="prev-page" class="pagination-btn" disabled>上一页</button>
+    <span id="page-info" class="page-info">第 1 页</span>
+    <button id="next-page" class="pagination-btn">下一页</button>
+  </div>
+</div>
+
+</main>
+</div>
+</div>
+
+{% endblock %}

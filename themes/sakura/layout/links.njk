@@ -1,0 +1,84 @@
+{% extends '_layout.njk' %}
+
+
+{% block title %}
+  {%- set page_title_suffix = ' | ' + title %}
+    {{- page.title + page_title_suffix }}
+{% endblock %}
+
+
+
+{% block class %}page  posts-expand link{% endblock %}
+
+
+
+{% block content %}
+
+
+  {% if page.photos and page.photos.length %}
+<div class="pattern-center ">
+  <div class="pattern-attachment-img">
+ 
+    <img  src="{{ theme.lazyloadImg }}" data-src="{{ page.photos }}" class="lazyload" onerror="imgError(this,3)" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;">
+  </div>
+  <header class="pattern-header ">
+    <h1 class="entry-title">
+    友人帐</h1>
+  </header>
+</div>
+{% else %}
+<div class="blank"></div>
+{% endif %}
+
+
+<div id="content" class="site-content">
+  <article class="post-item post-301 page type-page status-publish has-post-thumbnail hentry">
+    <p>
+    欢迎交换友链 ꉂ(ˊᗜˋ)</p>
+    <p>
+      请留言告诉我你的：<br>
+      1、名字<br>
+      2、一句话介绍（熟人我会亲自帮写的）<br>
+      3、主页地址<br>
+    4、头像（HTTPS*，可在评论区上传）</p>
+    <p>
+      For Example：<br>
+      ★ Name: hojun<br>
+      ★ Bio: 好少年光芒万丈<br>
+      ★ URL: https://www.hojun.cn<br>
+      ★ Avatar: <a href="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/custom/avatar.jpg" target="_blank" rel="nofollow">
+      获取嵌入代码</a>
+    </p>
+    <p style="font-size: 13px">
+    ※ 为保证友链质量，今后新申请的友链将经过筛选，请在收到我的回复邮件后再于贵站添加本站链接。原则上过去已添加友链不会轻易删除，如遇死链、改变网站用途（友链主要针对的是同类的博客），将单独移至"阵亡将士"分类中，下次清理时未整改的将移除；如遇盗版、破解、网页植入挖矿脚本、极低质量内容、单方面移除本站链接，将直接移除，恕不另行通知。</p>
+    {% if page.links %}
+
+ {%- for link in site.data.links %}
+ <div class="links-container">
+  <h2 class="links-group"><span class="fake-title">{{ link.group }}</span></h2>
+
+   <ul class="links-card" itemscope itemtype="http://schema.org/Article">
+    {%- for item in link.items %}
+      <li class="links-content">
+       {#
+            <div class="link-avatar">
+              <img class="lozad" src="{{ theme.lazyloadImg}}" data-src="{{ item.img }}">
+            </div>
+            #}
+            <div class="link-title">
+                <a class="title" href="{{ item.url }}" title="{{ item.desc }}" target="_blank" rel="friend">{{ item.name}}</a>
+            </div>
+            <p class="desc"> {{ item.desc }}</p>
+          
+
+      </li>  
+       {%- endfor %}
+  </ul>
+  </div>
+   {%- endfor %}
+    {% endif %}
+  </article>
+
+
+</div>
+{% endblock %}

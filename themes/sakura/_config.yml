@@ -1,0 +1,179 @@
+# site name
+prefixName: さくら荘そ
+title: さくら荘そ
+# favicon and site master avatar
+favicon: /images/favicon.ico
+avatar: https://i0.hdslb.com/bfs/article/318bbf54f45140411e981ed6ce80867244104643.jpg
+author: hfsyun
+url: https://sakura.hojun.cn
+description: Live your life with passion! With some drive!
+
+# 自定义cdn | 不要/
+cdn: https://fastly.jsdelivr.net/gh/honjun/cdn@1.6
+
+#  1开启 | 0关闭
+pjax: 1
+
+# 1开启
+mathjax: 0
+
+referrer: true
+
+live2d: false
+
+family_global: HarmonyOS_Regular, Source Han Serif SC,Source Han Serif,source-han-serif-sc,PT Serif,SongTi SC,MicroSoft Yahei,Georgia,serif
+
+
+footer:
+  since: 2018
+
+notice: hexo-Sakura主题已经开源，目前正在开发中...
+lazyloadImg: https://fastly.jsdelivr.net/gh/hfsyun/cdn@3.5/loading/loading.svg
+imgError: https://fastly.jsdelivr.net/gh/honjun/cdn@1.6/img/other/image-404.png
+
+
+#lazyloadImg: https://unpkg.com/hfsyun-blog@2.0.2/dist/loading/loading.svg
+
+
+
+# 文章默认图
+#defaultCover: https://cdn.jsdelivr.net/gh/hfsyu/pic@hf/img/defaultCover.jpg
+#defaultCover: https://img.hfsyun.fun/large/20220914033025.jpg
+
+
+#pjax加载动画
+# false  true
+#loading: https://i0.hdslb.com/bfs/article/d3bbc758c4d0d24de27e069eea2f12dd44104643.gif
+
+
+
+menus:
+  首页: { path: /, fa: fa-fort-awesome faa-shake }
+  归档: { path: /archives, fa: fa-archive faa-shake }
+  #清单: { path: javascript:;, fa: fa-list-ul faa-vertical, submenus: { 
+    #书单: {path: /tags/悦读/, fa: fa-th-list faa-bounce }, 
+    #番组: {path: /bangumi/, fa: fa-film faa-vertical }, 
+    #歌单: {path: /music/, fa: fa-headphones },
+    #图集: {path: /tags/图集/, fa: fa-photo }
+  #} }
+  番组: {path: /bangumi/, fa: fa-film faa-vertical }
+  说说: {path: /say/, fa: fa-comment-o faa-shake }
+  留言板: { path: /comment/, fa: fa-pencil-square-o faa-tada }
+  友人帐: { path: /links/, fa: fa-link faa-shake }
+  关于: { path: /about/, fa: fa-meetup}
+
+
+
+# Home page sort type: -1: newer first，1: older first.
+homePageSortType: -1
+# Home page article shown number)
+homeArticleShown: 10
+# 背景图片 更好的修改
+bg:
+ - https://i0.hdslb.com/bfs/openplatform/a606cd2ba323e82aee7edcaf1990d0754488c0d5.webp
+ - https://i0.hdslb.com/bfs/openplatform/02bdcb08eb51f91286e8818b92bab50032c186fc.webp
+ - https://i0.hdslb.com/bfs/openplatform/4e160281808476a0113c9f0e7b37a7426b292463.webp
+ - https://i0.hdslb.com/bfs/openplatform/149a29c4c2f40aa23fc3603070e3a5c33a640cce.webp
+ - https://i0.hdslb.com/bfs/openplatform/e02580b5f8559e5908f5ddee1f4bab343fc33990.webp
+
+# 背景图片样式 空 原图效果 filter-dim 阴影 filter-grid 横条 filter-dot 点点
+bgclass: filter-dot
+
+# startdash url, title, desc img
+startdashed: false
+startdash: 
+  - {url: /theme-sakura/, title: Sakura, desc: 本站 hexo 主题, img: /img/startdash/sakura.md.png}
+  - {url: http://space.bilibili.com/271849279, title: Bilibili, desc: 博主的b站视频, img: /img/startdash/bilibili.jpg}
+  - {url: /, title: hojun的万事屋, desc: 技术服务, img: /img/startdash/wangshiwu.jpg}
+
+
+# 自动摘要
+auto_excerpt:
+   enable: true
+   length: 100
+
+# your site build time or founded date
+siteBuildingTime: 07/17/2018
+
+#social  url, img PC端配置
+social:
+  github: {url: http://github.com/honjun, fa: fa fa-github}
+  sina: {url: http://weibo.com/mashirozx?is_all=1, fa: fa fa-weibo}
+  wangyiyun: {url: http://weibo.com/mashirozx?is_all=1, fa: fa fa-youtube-play}
+  email: {url: mailto:hojun@hojun.cn, fa: fa fa-envelope}
+
+
+#social  url, img 移动端配置
+msocial:
+  github: {url: http://github.com/honjun, fa: fa-github, color: 333}
+  weibo: {url: http://weibo.com/mashirozx?is_all=1, fa: fa-weibo, color: dd4b39}
+  qq: {url: https://wpa.qq.com/msgrd?v=3&uin=954655431&site=qq&menu=yes, fa: fa-qq, color: 25c6fe}
+
+#donate:
+  #paypal: https://www.paypal.me/hojuncn
+  #alipay: /img/custom/donate/AliPayQR.jpg
+  #wechat: /img/custom/donate/WeChanQR.jpg
+  #wechatSQ: /img/custom/donate/WeChanSQ.jpg
+
+# 视频地址为https://fastly.jsdelivr.net/gh/honjun/hojun@1.2/Unbroken.mp4，配置如下
+movies:
+  url: https://fastly.jsdelivr.net/gh/honjun/hojun@1.2
+  # 多个视频用逗号隔开，随机获取。支持的格式目前已知MP4,Flv。其他的可以试下，不保证有用
+  name: Unbroken.mp4
+
+
+#LeanCloud 将于 2027 年 1 月 12 日停止对外提供服务
+Say:
+  enable: true 
+  appID:  Hykhde5n6gYVFBQOepIhujcO-MdYXbMMI
+  appKEY: 95V7VJnne3URkf9NLj3GZ57R
+  serverURL:  https://hykhde5n.api.lncldglobal.com   
+  pageSize: 10
+  loadImg: https://fastly.jsdelivr.net/gh/hfsyun/cdn@3.5/loading/loading.svg 
+  js: /js/Say.min.js 
+
+
+# Valine
+valine: false
+v_appId: GyC3NzMvd0hT9Yyd2hYIC0MN-gzGzoHsz
+v_appKey: mgOpfzbkHYqU92CV4IDlAUHQ
+
+# Waline
+#waline:
+  #enable: false
+  #serverURL: #服务端地址
+  #visitor: false #统计阅读量
+  #comment_count: true #统计评论数
+  #avatar: mp # Gravatar style : mp/identicon/monsterid/wavatar/retro/hide
+  #guest_info: nick #,mail,link # custom comment header
+  #pageSize: 10
+  #placeholder: 祝开开心心！ # Comment Box placeholder
+  #requiredFields: [ 'nick','mail' ] #设置必填项
+  #background: https://gitee.com/cungudafa/source/raw/master/img/gif/Sitich/Sitich2.gif #输入框提示动画
+
+
+
+
+
+style:
+  - /css/lib.min.css
+  - https://s4.zstatic.net/ajax/libs/font-awesome/6.7.2/css/all.min.css
+  - https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css
+
+
+scripts:
+  - /js/lib.min.js
+  - https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/clipboard.js/2.0.11/clipboard.min.js
+  - /js/InsightSearch.js
+  - /js/jquery.fancybox.min.js
+  - /js/sakura-app.js
+  - /js/botui.js
+  - //busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js
+
+
+# Assets
+# Accelerate delivery of static files using a CDN
+css: css
+js: js
+images: images
+version: 1.2

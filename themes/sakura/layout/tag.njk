@@ -1,0 +1,38 @@
+{% extends '_layout.njk' %}
+{% import '_macro/collapse-item.njk' as post_template with context %}
+
+
+{% block title %}{{ __('title.tag') }}: {{ page.tag }} | {{ title }}{% endblock %}
+
+{% block class %}tag page posts-collapse{% endblock %}
+
+
+
+
+
+
+
+{% block content %}
+<div class="blank">
+</div>
+<div id="content" class="site-content">
+  <div id="primary" class="content-area">
+    <main id="main" class="site-main" role="main">
+      <header class="page-header"><h1 class="cat-title">{{ page.tag }}</h1> <span class="cat-des"> </span></header>
+     {{ post_template.render(page.posts) }}
+
+      <div class="clearer">
+      </div>
+    </main>
+
+
+
+
+       {%- if page.total > 1 and page.next_link %}
+
+    <div id="pagination"><a href="{{ url_for(page.next_link) }}" class="">Previous</a></div>
+    {%- endif %}
+  </div>
+</div>
+
+{% endblock %}

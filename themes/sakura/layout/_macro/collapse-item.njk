@@ -1,0 +1,42 @@
+{% macro render(posts) %}
+{%- for post in posts.toArray() %}
+<article class="post post-list" itemscope="" itemtype="https://schema.org/BlogPosting">
+  <div class="post-entry">
+    <div class="feature">
+      <a href="{{ url_for(post.path) }}">
+        <div class="overlay">
+          <i class="iconfont icon-text">
+          </i>
+        </div>
+        <img width="150" height="150" alt="post_img" class="lazyload attachment-post-thumbnail size-post-thumbnail wp-post-image" src="{{ theme.lazyloadImg }}" data-src="{{ post.covers | default(_cover(post)) }}">  
+      </a>
+    </div>
+    <h1 class="entry-title">
+    <a href="{{ url_for(post.path) }}">
+    {{ post.title }}</a>
+    </h1>
+    <div class="p-time">
+      <i class="iconfont icon-time">
+      </i>
+    {{ date(post.date, 'YYYY-M-D') }}</div>
+    <p>
+      {%- if post.description   %}     
+          {{ post.description }}
+   {% elif  theme.auto_excerpt.enable  %}
+         {% set content = post.content | striptags %}    
+          {{ content.substring(0, theme.auto_excerpt.length) }}
+            {% if content.length > theme.auto_excerpt.length %}...{% endif %}
+      {%- endif %}  </p>
+    <footer class="entry-footer">
+      <div class="post-more">
+        <a href="{{ url_for(post.path) }}">
+          <i class="iconfont icon-caidan">
+          </i>
+        </a>
+      </div>
+    </footer>
+  </div>
+  <hr>
+</article>
+{%- endfor %}
+{% endmacro %}
