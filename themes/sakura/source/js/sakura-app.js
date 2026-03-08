@@ -1819,10 +1819,24 @@ function createSayElement(say) {
                 document.querySelectorAll('.bangumi-rank-tab').forEach(t => t.classList.remove('active'));
                 this.classList.add('active');
                 
+                updateStatusTabText(type);
+                
                 // 重置页码为1并渲染
                 renderRankList(type, status, 1);
               });
             });
+            
+            function updateStatusTabText(type) {
+              document.querySelectorAll('.bangumi-status-tab').forEach(tab => {
+                const status = tab.dataset.status;
+                if (status === 'all') return;
+                const textAttr = `data-text-${type}`;
+                const newText = tab.getAttribute(textAttr);
+                if (newText) {
+                  tab.textContent = newText;
+                }
+              });
+            }
             
             // 绑定状态选项卡点击事件
             document.querySelectorAll('.bangumi-status-tab').forEach(tab => {
