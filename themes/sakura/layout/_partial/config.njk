@@ -8,11 +8,11 @@
    v_appId: '{{ theme.v_appId }}',
    v_appKey: '{{ theme.v_appKey }}',
    lazyloadImg: '{{ theme.lazyloadImg }}',
+   audio: '{{ theme.audio | safedump  }}',
    Say: {
     js: '{{ theme.Say.js }}',
-    appID: '{{ theme.Say.appID }}',
-    appKEY: '{{ theme.Say.appKEY }}',
-    serverURL: '{{ theme.Say.serverURL }}',
+    supabaseUrl: '{{ theme.Say.supabaseUrl }}',
+    supabaseAnonKey: '{{ theme.Say.supabaseAnonKey }}',
     pageSize: '{{ theme.Say.pageSize }}',
     loadImg: '{{ theme.Say.loadImg }}',
    }

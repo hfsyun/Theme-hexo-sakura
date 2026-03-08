@@ -30,7 +30,6 @@ mashiro_global.variables = new function () {
 mashiro_global.ini = new function () {
   this.normalize = function () {
     lazyload()
-    social_share()
     mashiro_global.post_list_show_animation.ini()
     copy_code_block()
     if (window.is_app) {
@@ -52,7 +51,6 @@ mashiro_global.ini = new function () {
   }
   this.pjax = function () {
     pjaxInit()
-    social_share()
     mashiro_global.post_list_show_animation.ini()
     copy_code_block()
  
@@ -140,7 +138,7 @@ function removeCookie (name) {
 
 
 function jumpTo (url) {
-  return mashiro_global.lib.pjax_to_url(url, '#page')
+  return mashiro_global.lib.pjax_to_url(url, '#main-container')
 }
 
 function injectStyles (rule) {
@@ -427,7 +425,7 @@ $(document).ready(function () {
       $('#banner_wave_1').addClass('banner_wave_hide_fit_skin')
       $('#banner_wave_2').addClass('banner_wave_hide_fit_skin')
       closeSkinMenu()
-      setCookie('bgImgSetting', url, 30)
+      //setCookie('bgImgSetting', url, 30)
     })
   }
 
@@ -443,7 +441,7 @@ $(document).ready(function () {
       $('#banner_wave_1').addClass('banner_wave_hide_fit_skin')
       $('#banner_wave_2').addClass('banner_wave_hide_fit_skin')
       closeSkinMenu()
-      setCookie('bgImgSetting', url, 30)
+      //setCookie('bgImgSetting', url, 30)
     })
   }
   changeBG('#sakura-bg', 'https://fastly.jsdelivr.net/gh/honjun/cdn@1.6/img/themebg/sakura.png')
@@ -463,7 +461,7 @@ $(document).ready(function () {
     $('#banner_wave_1').removeClass('banner_wave_hide_fit_skin')
     $('#banner_wave_2').removeClass('banner_wave_hide_fit_skin')
     closeSkinMenu()
-    setCookie('bgImgSetting', '', 30)
+    //setCookie('bgImgSetting', '', 30)
   })
   $('.skin-menu #dark-bg').click(function () {
     mashiro_global.variables.skinSecter = true
@@ -834,11 +832,11 @@ function inlojv_js_getqqinfo () {
           $('.qq-check').css('display', 'block')
           $('.gravatar-check').css('display', 'none')
         }
-        setCookie('user_author', data[qq][6], 30)
-        setCookie('user_qq', qq, 30)
-        setCookie('is_user_qq', 'yes', 30)
-        setCookie('user_qq_email', qq + '@qq.com', 30)
-        setCookie('user_email', qq + '@qq.com', 30)
+        //setCookie('user_author', data[qq][6], 30)
+       // setCookie('user_qq', qq, 30)
+        //setCookie('is_user_qq', 'yes', 30)
+        //setCookie('user_qq_email', qq + '@qq.com', 30)
+        //setCookie('user_email', qq + '@qq.com', 30)
         emailAddressFlag = $('input#email').val()
       }, error: function () {
         if (qq_test.test(qq)) {
@@ -848,9 +846,9 @@ function inlojv_js_getqqinfo () {
         $('.qq-check').css('display', 'none')
         $('.gravatar-check').css('display', 'block')
         $('div.comment-user-avatar img').attr('src', get_gravatar($('input#email').val(), 80))
-        setCookie('user_qq', '', 30)
-        setCookie('user_email', $('input#email').val(), 30)
-        setCookie('user_avatar', get_gravatar($('input#email').val(), 80), 30)
+        //setCookie('user_qq', '', 30)
+        //setCookie('user_email', $('input#email').val(), 30)
+        //setCookie('user_avatar', get_gravatar($('input#email').val(), 80), 30)
       }
     })
     $.ajax({
@@ -866,7 +864,7 @@ function inlojv_js_getqqinfo () {
       }, success: function (data) {
         $('div.comment-user-avatar img').attr('src', data[qq])
         addComment.createButterbar('QQ头像获取成功')
-        setCookie('user_avatar', data[qq], 30)
+        //setCookie('user_avatar', data[qq], 30)
       }, error: function () {
         if (qq_test.test(qq)) {
           addComment.createButterbar('QQ号不存在（建议不要使用纯数字昵称）')
@@ -875,9 +873,9 @@ function inlojv_js_getqqinfo () {
         if (!$('input#qq').val()) {
           $('.qq-check').css('display', 'none')
           $('.gravatar-check').css('display', 'block')
-          setCookie('user_qq', '', 30)
+          //setCookie('user_qq', '', 30)
           $('div.comment-user-avatar img').attr('src', get_gravatar($('input#email').val(), 80))
-          setCookie('user_avatar', get_gravatar($('input#email').val(), 80), 30)
+          //setCookie('user_avatar', get_gravatar($('input#email').val(), 80), 30)
         }
       }
     })
@@ -895,10 +893,10 @@ function inlojv_js_getqqinfo () {
     var emailAddress = $('input#email').val()
     if (is_get_by_qq == false || emailAddressFlag != emailAddress) {
       $('div.comment-user-avatar img').attr('src', get_gravatar(emailAddress, 80))
-      setCookie('user_avatar', get_gravatar(emailAddress, 80), 30)
-      setCookie('user_email', emailAddress, 30)
-      setCookie('user_qq_email', '', 30)
-      setCookie('is_user_qq', 'no', 30)
+     // setCookie('user_avatar', get_gravatar(emailAddress, 80), 30)
+     // setCookie('user_email', emailAddress, 30)
+     // setCookie('user_qq_email', '', 30)
+     // setCookie('is_user_qq', 'no', 30)
       $('input#qq').val('')
       if (!$('input#qq').val()) {
         $('.qq-check').css('display', 'none')
@@ -912,7 +910,7 @@ function inlojv_js_getqqinfo () {
   $('input#url').on('blur', function () {
     var URL_Address = $('input#url').val()
     $('input#url').val(URL_Address)
-    setCookie('user_url', URL_Address, 30)
+    //setCookie('user_url', URL_Address, 30)
   })
   if (getCookie('user_author')) {
     $('input#author').val(getCookie('user_author'))
@@ -920,7 +918,7 @@ function inlojv_js_getqqinfo () {
   $('input#author').on('blur', function () {
     var user_name = $('input#author').val()
     $('input#author').val(user_name)
-    setCookie('user_author', user_name, 30)
+    //setCookie('user_author', user_name, 30)
   })
 }
 
@@ -995,12 +993,10 @@ var currentFontIsUbuntu = true
 // }
 mashiro_global.ini.normalize()
 
+
 var home = location.href,
   s = $('#bgvideo')[0],
   Siren = {
-    BSZ: function() {
-      $.getScript('//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js')
-    },
     TOC: function () {
       if ($('.toc').length > 0 && document.body.clientWidth > 1200) {
         if ($(".pattern-center").length > 0) { //有图的情况
@@ -1037,16 +1033,7 @@ var home = location.href,
             $('.toc').removeClass('toc-fixed')
           }
         }
-        $.getScript('//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js');
-      }
-    },
-    AB: function () {
-      if (window.location.pathname.indexOf('about') > -1) {
-        $.getScript('/js/botui.js', function () {
-          if (typeof(botui) == undefined && !botui.message) {
-            bot_ui_ini()
-          }
-        })
+        //$.getScript('//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js');
       }
     },
     VA: function () {
@@ -1175,7 +1162,7 @@ var home = location.href,
       })
     }, AH: function () {
       if (Poi.windowheight == 'auto') {
-        if ($('h1.main-title').length > 0) {
+        if ($('.headertop').length > 0) {
           var _height = $(window).height()
           $('#centerbg').css({
             'height': _height
@@ -1192,22 +1179,14 @@ var home = location.href,
       }
     }, PE: function () {
       if ($('.headertop').length > 0) {
-        if ($('h1.main-title').length > 0) {
-          $('.blank').css({
-            'padding-top': '0px'
-          })
           $('.headertop').css({
             'height': 'auto'
           }).show()
           if (Poi.movies.live == 'open') Siren.liveplay()
           $('.site-header').addClass('is-homepage')
-        } else {
-          $('.headertop').css({
-            'height': '0px'
-          }).hide()
+      } else {
           Siren.livepause()
         }
-      }
     }, CE: function () {
       $('.comments-hidden').show()
       $('.comments-main').hide()
@@ -1466,17 +1445,19 @@ var home = location.href,
           }, scroll_top_duration)
       })
     },
-        SAY: function() {
+    SAY: function () {
     // 检查当前页面是否为首页或say页面
     const currentPath = window.location.pathname;
     const isSayPage = currentPath === '/say/' || currentPath.includes('/say');
-    const isHomePage = currentPath === '/' || currentPath.includes('/index');
+    const isHomePage = currentPath === '/' || currentPath.includes('/index.html');
+
+
     if (!isHomePage && !isSayPage) {
         return; // 不在指定页面则不执行
     }
     
     // 如果是首页，加载说说并插入到文章流中
-    if (isHomePage)  {
+    if (isHomePage) {
         Siren.loadScript(mashiro_option.Say.js, function () {
             loadSayIntoPostFlow();
         });
@@ -1486,9 +1467,8 @@ var home = location.href,
     if (isSayPage) {
         Siren.loadScript(mashiro_option.Say.js, function () {
             new Say({
-                appId: mashiro_option.Say.appID,
-                appKey: mashiro_option.Say.appKEY,
-                serverURL: mashiro_option.Say.serverURL,
+                supabaseUrl: mashiro_option.Say.supabaseUrl,
+                supabaseAnonKey: mashiro_option.Say.supabaseAnonKey,
                 pageSize: mashiro_option.Say.pageSize,
                 loadImg: mashiro_option.Say.loadImg
             });
@@ -1500,13 +1480,15 @@ function loadSayIntoPostFlow() {
     const postContainer = document.getElementById('main');
     if (!postContainer) return;
     
-    let serverURL = mashiro_option.Say.serverURL;
-    // 获取说说数据
-    fetch(`${serverURL}/1.1/classes/Say?where={}&limit=5&order=-createdAt`, {
+    const supabaseUrl = mashiro_option.Say.supabaseUrl;
+    const supabaseAnonKey = mashiro_option.Say.supabaseAnonKey;
+    const apiEndpoint = `${supabaseUrl}/rest/v1/says?select=*&order=created_at.desc&offset=0&limit=5`;
+    
+    fetch(apiEndpoint, {
         method: 'GET',
         headers: {
-            'X-LC-Id': mashiro_option.Say.appID,
-            'X-LC-Key': mashiro_option.Say.appKEY,
+            'apikey': supabaseAnonKey,
+            'Authorization': `Bearer ${supabaseAnonKey}`,
             'Content-Type': 'application/json'
         }
     })
@@ -1517,12 +1499,10 @@ function loadSayIntoPostFlow() {
         return response.json();
     })
     .then(data => {
-        if (data.results && data.results.length > 0) {
-            // 获取现有的文章元素
+        if (data && data.length > 0) {
             const postItems = Array.from(postContainer.children);
             const allItems = [];
             
-            // 将文章添加到数组中，并提取发布时间
             postItems.forEach(item => {
                 const timeElement = item.querySelector('time[datetime]');
                 const datetime = timeElement ? new Date(timeElement.getAttribute('datetime')) : new Date(0);
@@ -1533,10 +1513,15 @@ function loadSayIntoPostFlow() {
                 });
             });
             
-            // 将说说添加到数组中
-            data.results.forEach(say => {
-                const sayDate = new Date(say.createdAt);
-                const sayElement = createSayElement(say);
+            data.forEach(say => {
+                const sayDate = new Date(say.created_at);
+                const normalizedSay = {
+                    content: say.content,
+                    avatar: say.avatar,
+                    username: say.username,
+                    createdAt: say.created_at
+                };
+                const sayElement = createSayElement(normalizedSay);
                 allItems.push({
                     element: sayElement,
                     date: sayDate,
@@ -1544,10 +1529,8 @@ function loadSayIntoPostFlow() {
                 });
             });
             
-            // 按时间排序（最新的在前）
             allItems.sort((a, b) => b.date - a.date);
             
-            // 清空容器并重新插入排序后的元素
             postContainer.innerHTML = '';
             allItems.forEach(item => {
                 postContainer.appendChild(item.element);
@@ -1605,8 +1588,7 @@ function createSayElement(say) {
     
     return sayDiv;
 }
-},
-    loadScript: function (url, callback) {
+},loadScript: function (url, callback) {
         if (document.querySelector(`script[src="${url}"]`)) {
             callback && callback();
             return Promise.resolve();
@@ -1885,7 +1867,7 @@ function createSayElement(say) {
 $(function () {
   Siren.AH()
   Siren.PE()
-  //Siren.NH()
+  Siren.NH()
   Siren.GT()
   Siren.XLS()
   Siren.XCS()
@@ -1896,10 +1878,11 @@ $(function () {
   Siren.LV()
   Siren.BTV()
   Siren.SAY()
+  Siren.TOC()
   if (window.is_app) injectStyles('#nprogress .bar { display: none; }')
   if (Poi.pjax == 1) {
-    $(document).pjax('a[target!=_top]', '#page', {
-      fragment: '#page',
+    $(document).pjax('a[target!=_top]', '#main-container', {
+      fragment: '#main-container',
       timeout: 8000
     }).on('pjax:send', function () {
       $('#bar').css('width', '0%')
@@ -1911,9 +1894,9 @@ $(function () {
       Siren.CE()
       //Siren.VA()
       Siren.MJ()
-      Siren.AB()
+      //Siren.AB()
       Siren.TOC()
-      Siren.BSZ()
+      //Siren.BSZ()
       Siren.BTV()
       Siren.SAY()
       if (mashiro_option.NProgressON) NProgress.done()
@@ -1931,8 +1914,8 @@ $(function () {
       }
     }).on('submit', '.search-form,.s-search', function (event) {
       event.preventDefault()
-      $.pjax.submit(event, '#page', {
-        fragment: '#page',
+      $.pjax.submit(event, '#main-container', {
+        fragment: '#main-container',
         timeout: 8000
       })
       if ($('.js-search.is-visible').length > 0) {

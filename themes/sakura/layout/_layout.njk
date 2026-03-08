@@ -6,33 +6,62 @@
 </head>
 
 <body class="serif isWebKit">
-  <div class="scrollbar" id="bar">
-  </div>
+  <div class="scrollbar" id="bar"></div>
 
   <a href="#" class="cd-top faa-float animated"></a>
-   {% include '_partial/header.njk' %}
-  <section id="main-container">
-  {% include '_partial/headertop.njk' %}
 
-    <div id="page" class="site wrapper {% block class %}{% endblock %}">
+<div id="container">
+
+   {% include '_partial/header.njk' %}
+
+
+
+
+
+
+  <section id="main-container">
+
+    
+        {% block headertop %}{% endblock %}
+
+    <div class="site wrapper {% block class %}{% endblock %}">
        {% block content %}{% endblock %}
     </div>   
-
     {% include '_widget/search/insight.njk' %}
-    {% include '_partial/footer.njk' %}
+  </section>
+     {% include '_partial/footer.njk' %}
+<div class="widgets"> 
+ 
     <div class="openNav no-select" style="height: 50px;">
       <div class="iconflat no-select" style="width: 50px; height: 50px;">
         <div class="icon"></div>
       </div>
-      <div class="site-branding search-form-submit">
-        <i class="iconfont js-toggle-search iconsearch icon-search"></i>
-      </div>
     </div>
-  </section>
+
+</div>
+
   <div id="backstretch">
     <img src="" alt="" referrerPolicy="no-referrer">
   </div>
+
+
+<div class="audio">
+    <button class="music-toggle-btn" id="musicToggleBtn" title="打开音乐播放器">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="var(--next-theme-color)">
+            <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+        </svg>
+    </button>
+
+    <div id="playerMusic"  class="player"></div> 
+</div>
+
+
   {% include '_partial/mheader.njk' %}
    
+
+</div>
+
+
+
 </body>
 </html>

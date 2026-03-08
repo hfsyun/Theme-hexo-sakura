@@ -17,6 +17,8 @@ pjax: 1
 # 1开启
 mathjax: 0
 
+
+# 开启后卜算子统计不能使用
 referrer: true
 
 live2d: false
@@ -122,15 +124,34 @@ movies:
   name: Unbroken.mp4
 
 
+
+
+#// 音乐播放器 - 提取自Shoka主题
+audio:
+  - title: 动画
+    list:
+       - https://music.163.com/#/discover/toplist?id=3001835560
+
+  - title: 新歌榜
+    list:
+       - https://music.163.com/#/discover/toplist?id=3779629  
+
+  - title: 我的收藏
+    list:
+       - https://music.163.com/#/playlist?id=10050572942
+
+
+
+
+
 #LeanCloud 将于 2027 年 1 月 12 日停止对外提供服务
 Say:
   enable: true 
-  appID:  Hykhde5n6gYVFBQOepIhujcO-MdYXbMMI
-  appKEY: 95V7VJnne3URkf9NLj3GZ57R
-  serverURL:  https://hykhde5n.api.lncldglobal.com   
+  supabaseUrl: https://oauzxgnwtwolavdesdly.supabase.co
+  supabaseAnonKey: sb_publishable_5f4MIi1dkc6n5peShJVM-w_cSGeZrgs
   pageSize: 10
   loadImg: https://fastly.jsdelivr.net/gh/hfsyun/cdn@3.5/loading/loading.svg 
-  js: /js/Say.min.js 
+  js: /js/Say3.min.js #https://fastly.jsdelivr.net/gh/hfsyun/cdn@55992f8/js/Say3.min.js
 
 
 # Valine
@@ -161,14 +182,29 @@ style:
   - https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css
 
 
+#lib.min.js 所有的js库，包括
+# jquery
+# jquery.pjax
+#highlight.js
+##highlight.js line numbers
+#NProgress
+#lazyload
+#Materialize
+#tocbot.js
+# clipboard.min.js
+# InsightSearch.js
+# Play.js
+
+
+
 scripts:
   - /js/lib.min.js
-  - https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/clipboard.js/2.0.11/clipboard.min.js
-  - /js/InsightSearch.js
-  - /js/jquery.fancybox.min.js
+  - https://fastly.jsdelivr.net/npm/@supabase/supabase-js@2.98.0/dist/umd/supabase.js
+  - /js/supabase-client.js
   - /js/sakura-app.js
-  - /js/botui.js
-  - //busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js
+  - /js/music.js
+
+
 
 
 # Assets

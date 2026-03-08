@@ -4,7 +4,14 @@
                         <img alt="post_img" class="lazyload" src="{{ theme.lazyloadImg }}" data-src="{{ post.covers | default(_cover(post)) }}">                    </a>
                 </div><!-- thumbnail-->
                 <div class="post-date">
-                    <i class="iconfont icon-time"></i>发布于{{ date(post.date, 'YYYY-M-D') }}                                    </div>
+                    <i class="iconfont icon-time"></i>发布于   
+                          {%- if not date_diff and time_diff  %}
+        {%- set create_title =  full_date(post.date) + ' / ' + __('post.modified') + __('symbol.colon') + time(post.updated) %}
+      {% else  %}
+        {%- set create_title =  full_date(post.date) %}
+      {%- endif %}  
+                    <time  title="{{ create_title }}"  itemprop="dateCreated datePublished" datetime="{{  date(post.date, 'YYYY-MM-DD HH:mm:ss')  }}">{{ date(post.date, 'YYYY-M-D') }}</time>                               
+                    </div>
                 <div class="post-meta">
                     <span class="meta-author"><a href="/"><img alt="{{ theme.author }}" src="{{ theme.avatar }}"  class="avatar avatar-16 photo avatar" height="16" width="16" decoding="async"></a><a rel="author" title="{{ theme.author }}" href="/">{{ theme.author }}</a></span>
                     {% if post.categories and post.categories.length  %}
