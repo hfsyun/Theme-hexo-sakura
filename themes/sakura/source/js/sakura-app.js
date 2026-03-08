@@ -149,20 +149,6 @@ function injectStyles (rule) {
 
 function imgError (ele, type) {
   switch (type) {
-    case 1:
-      if (ele.src.includes('https://cn.gravatar.com/avatar')) {
-        ele.src = ele.src.replace('https://cn.gravatar.com/avatar/', 'https://fastly.jsdelivr.net/gh/honjun/cdn@1.6/img/other/gravatar.jpg')
-      } else {
-        ele.src = 'https://fastly.jsdelivr.net/gh/honjun/cdn@1.6/img/other/default_avatar.jpg'
-      }
-      break
-    case 2:
-      ele.src = 'https://fastly.jsdelivr.net/gh/honjun/cdn@1.6/img/other/default_gavatar.jpg'
-      break
-    case 3:
-
-      ele.src = 'https://fastly.jsdelivr.net/gh/honjun/cdn@1.6/img/other/image-404.png'
-      break
     default:
       ele.src = 'https://fastly.jsdelivr.net/gh/honjun/cdn@1.6/img/other/image-404.png'
   }
@@ -243,95 +229,6 @@ function copy_code_block () {
   var clipboard = new ClipboardJS('.copy-code')
 }
 
-function attach_image () {
-  $('#upload-img-file').change(function () {
-    if (this.files.length > 10) {
-      addComment.createButterbar('每次上传上限为10张.<br>10 files max per request.')
-      return 0
-    }
-    for (i = 0; i < this.files.length; i++) {
-      if (this.files[i].size >= 5242880) {
-        alert('图片上传大小限制为5 MB.\n5 MB max per file.\n\n「' + this.files[i].name + '」\n\n这张图太大啦~\nThis image is too large~')
-      }
-    }
-    for (var i = 0; i < this.files.length; i++) {
-      var f = this.files[i]
-      var formData = new FormData()
-      formData.append('smfile', f)
-      $.ajax({
-        url: 'https://sm.ms/api/upload',
-        type: 'POST',
-        processData: false,
-        contentType: false,
-        data: formData,
-        beforeSend: function (xhr) {
-          $('.insert-image-tips').html('<i class="fa fa-spinner rotating" aria-hidden="true"></i>')
-          addComment.createButterbar('上传中...<br>Uploading...')
-        }, success: function (res) {
-          $('.insert-image-tips').html('<i class="fa fa-check" aria-hidden="true"></i>')
-          setTimeout(function () {
-            $('.insert-image-tips').html('<i class="fa fa-picture-o" aria-hidden="true"></i>')
-          }, 1000)
-          var get_the_url = res.data.url.replace('https://i.loli.net/', 'https://static.shino.cc/user-upload/')
-          $('#upload-img-show').append('<img class="lazyload upload-image-preview" src="https://fastly.jsdelivr.net/gh/moezx/cdn@3.0.2/img/svg/loader/trans.ajax-spinner-preloader.svg" data-src="' + get_the_url + '" onclick="window.open(\'' + get_the_url + '\')" onerror="imgError(this)" />')
-          lazyload()
-          addComment.createButterbar('图片上传成功~<br>Uploaded successfully~')
-          grin(res.data.url.replace('https://i.loli.net/', '{UPLOAD}'), type = 'Img')
-        }, error: function () {
-          $('.insert-image-tips').html('<i class="fa fa-times" aria-hidden="true" style="color:red"></i>')
-          alert('上传失败，请重试.\nUpload failed, please try again.')
-          setTimeout(function () {
-            $('.insert-image-tips').html('<i class="fa fa-picture-o" aria-hidden="true"></i>')
-          }, 1000)
-        }
-      })
-    }
-  })
-}
-
-function clean_upload_images () {
-  $('#upload-img-show').html('')
-}
-
-function add_upload_tips () {
-  $('<div class="insert-image-tips popup"><i class="fa fa-picture-o" aria-hidden="true"></i><span class="insert-img-popuptext" id="uploadTipPopup">上传图片</span></div><input id="upload-img-file" type="file" accept="image/*" multiple="multiple" class="insert-image-button">').insertAfter($('.form-submit #submit'))
-  attach_image()
-  $('#upload-img-file').hover(function () {
-    $('.insert-image-tips').addClass('insert-image-tips-hover')
-    $('#uploadTipPopup').addClass('show')
-  }, function () {
-    $('.insert-image-tips').removeClass('insert-image-tips-hover')
-    $('#uploadTipPopup').removeClass('show')
-  })
-}
-
-function click_to_view_image () {
-  $('.comment_inline_img').click(function () {
-    var temp_url = $(this).attr('src')
-    window.open(temp_url)
-  })
-}
-click_to_view_image()
-
-function original_emoji_click () {
-  $('.emoji-item').click(function () {
-    grin($(this).text(), type = 'custom', before = '`', after = '` ')
-  })
-}
-original_emoji_click()
-
-function showPopup (ele) {
-  var popup = ele.querySelector('#thePopup')
-  popup.classList.toggle('show')
-}
-
-function cmt_showPopup (ele) {
-  var popup = $(ele).find('#thePopup')
-  popup.addClass('show')
-  $(ele).find('input').blur(function () {
-    popup.removeClass('show')
-  })
-}
 
 function scrollBar () {
   if (document.body.clientWidth > 860) {
@@ -402,11 +299,7 @@ if (document.body.clientWidth > 860) {
   checkBgImgCookie()
 }
 
-function no_right_click () {
-  $('.post-thumb img').bind('contextmenu', function (e) {
-    return false
-  })
-}
+
 if (mashiro_global.variables.isNight) {
   $('.changeSkin-gear, .toc').css('background', 'rgba(255,255,255,0.8)')
 } else {
@@ -425,7 +318,6 @@ $(document).ready(function () {
       $('#banner_wave_1').addClass('banner_wave_hide_fit_skin')
       $('#banner_wave_2').addClass('banner_wave_hide_fit_skin')
       closeSkinMenu()
-      //setCookie('bgImgSetting', url, 30)
     })
   }
 
@@ -441,7 +333,6 @@ $(document).ready(function () {
       $('#banner_wave_1').addClass('banner_wave_hide_fit_skin')
       $('#banner_wave_2').addClass('banner_wave_hide_fit_skin')
       closeSkinMenu()
-      //setCookie('bgImgSetting', url, 30)
     })
   }
   changeBG('#sakura-bg', 'https://fastly.jsdelivr.net/gh/honjun/cdn@1.6/img/themebg/sakura.png')
@@ -461,7 +352,6 @@ $(document).ready(function () {
     $('#banner_wave_1').removeClass('banner_wave_hide_fit_skin')
     $('#banner_wave_2').removeClass('banner_wave_hide_fit_skin')
     closeSkinMenu()
-    //setCookie('bgImgSetting', '', 30)
   })
   $('.skin-menu #dark-bg').click(function () {
     mashiro_global.variables.skinSecter = true
@@ -498,7 +388,6 @@ $(document).ready(function () {
   $('.skin-menu #close-skinMenu').click(function () {
     closeSkinMenu()
   })
-  add_upload_tips()
 })
 
 
@@ -612,20 +501,11 @@ function timeSeriesReload (flag) {
 timeSeriesReload()
 
 var pjaxInit = function () {
-  add_upload_tips()
-  click_to_view_image()
-  original_emoji_click()
   $('p').remove('.head-copyright')
   try {
     code_highlight_style()
   } catch (e) {};
-  try {
-    inlojv_js_getqqinfo()
-  } catch (e) {};
   lazyload()
-    // if ($("div").hasClass("popcontainer")) {
-    //     loadBotui();
-    // }
   try {
     reload_show_date_time()
   } catch (e) {}
@@ -645,39 +525,12 @@ var pjaxInit = function () {
   $('#bg-pre').click(function () {
     preBG()
   })
-  smileBoxToggle()
   timeSeriesReload()
   add_copyright()
-  console.log($('#myscript').text())
+  //console.log($('#myscript').text())
 }
-$(document).on('click', '.sm', function () {
-  var msg = '您真的要设为私密吗？'
-  if (confirm(msg) == true) {
-    $(this).commentPrivate()
-  } else {
-    aler('已取消')
-  }
-})
-$.fn.commentPrivate = function () {
-  if ($(this).hasClass('private_now')) {
-    alert('您之前已设过私密评论')
-    return false
-  } else {
-    $(this).addClass('private_now')
-    var idp = $(this).data('idp'),
-      actionp = $(this).data('actionp'),
-      rateHolderp = $(this).children('.has_set_private')
-    var ajax_data = {
-      action: 'siren_private',
-      p_id: idp,
-      p_action: actionp
-    }
-    $.post('/wp-admin/admin-ajax.php', ajax_data, function (data) {
-      $(rateHolderp).html(data)
-    })
-    return false
-  }
-}
+
+
 
 function show_date_time () {
   BirthDay = new Date('06/02/2017 18:00:00')
@@ -693,78 +546,14 @@ function show_date_time () {
 try {
   show_date_time()
 } catch (e) {}
-//POWERMODE.colorful = true
-//POWERMODE.shake = false
-//document.body.addEventListener('input', POWERMODE)
 
-function motionSwitch (ele) {
-  var motionEles = ['.bili', '.menhera', '.tieba']
-  for (var i in motionEles) {
-    $(motionEles[i] + '-bar').removeClass('on-hover')
-    $(motionEles[i] + '-container').css('display', 'none')
-  }
-  $(ele + '-bar').addClass('on-hover')
-  $(ele + '-container').css('display', 'block')
-}
-$('.comt-addsmilies').click(function () {
-  $('.comt-smilies').toggle()
-})
-$('.comt-smilies a').click(function () {
-  $(this).parent().hide()
-})
 
-function smileBoxToggle () {
-  $(document).ready(function () {
-    $('#emotion-toggle').click(function () {
-      $('.emotion-toggle-off').toggle(0)
-      $('.emotion-toggle-on').toggle(0)
-      $('.emotion-box').toggle(160)
-    })
-  })
-}
-smileBoxToggle()
 
-function grin (tag, type, before, after) {
-  var myField
-  if (type == 'custom') {
-    tag = before + tag + after
-  } else if (type == 'Img') {
-    tag = '[img]' + tag + '[/img]'
-  } else if (type == 'Math') {
-    tag = ' f(x)=∫(' + tag + ')sec²xdx '
-  } else {
-    tag = ' :' + tag + ': '
-  }
-  if (document.getElementById('comment') && document.getElementById('comment').type == 'textarea') {
-    myField = document.getElementById('comment')
-  } else {
-    return false
-  }
-  if (document.selection) {
-    myField.focus()
-    sel = document.selection.createRange()
-    sel.text = tag
-    myField.focus()
-  } else if (myField.selectionStart || myField.selectionStart == '0') {
-    var startPos = myField.selectionStart
-    var endPos = myField.selectionEnd
-    var cursorPos = endPos
-    myField.value = myField.value.substring(0, startPos) + tag + myField.value.substring(endPos, myField.value.length)
-    cursorPos += tag.length
-    myField.focus()
-    myField.selectionStart = cursorPos
-    myField.selectionEnd = cursorPos
-  } else {
-    myField.value += tag
-    myField.focus()
-  }
-}
-// if ($("div").hasClass("popcontainer")) {
-//     loadBotui();
-// }
-// $("bot-ui").click(function () {
-//     loadBotui();
-// });
+
+
+
+
+
 
 function add_copyright () {
   document.body.addEventListener('copy', function (e) {
@@ -787,140 +576,8 @@ function add_copyright () {
   }
 }
 add_copyright()
-$(function () {
-  inlojv_js_getqqinfo()
-})
 
-function inlojv_js_getqqinfo () {
-  var is_get_by_qq = false
-  var qq_test = /^[0-9]+$/
-  if (!getCookie('user_qq') && !getCookie('user_qq_email') && !getCookie('user_author')) {
-    $('input#qq,input#author,input#email,input#url').val('')
-  }
-  if (getCookie('user_avatar') && getCookie('user_qq') && getCookie('user_qq_email')) {
-    $('div.comment-user-avatar img').attr('src', getCookie('user_avatar'))
-    $('input#author').val(getCookie('user_author'))
-    $('input#email').val(getCookie('user_qq') + '@qq.com')
-    $('input#qq').val(getCookie('user_qq'))
-    if (mashiro_option.qzone_autocomplete) {
-      $('input#url').val('https://user.qzone.qq.com/' + getCookie('user_qq'))
-    }
-    if ($('input#qq').val()) {
-      $('.qq-check').css('display', 'block')
-      $('.gravatar-check').css('display', 'none')
-    }
-  }
-  var emailAddressFlag = $('input#email').val()
-  $('input#author').on('blur', function () {
-    var qq = $('input#author').val()
-    $.ajax({
-      type: 'get',
-      url: mashiro_option.qq_api_url + '?type=getqqnickname&qq=' + qq,
-      dataType: 'jsonp',
-      jsonp: 'callback',
-      jsonpCallback: 'portraitCallBack',
-      success: function (data) {
-        $('input#author').val(data[qq][6])
-        $('input#email').val($.trim(qq) + '@qq.com')
-        if (mashiro_option.qzone_autocomplete) {
-          $('input#url').val('https://user.qzone.qq.com/' + $.trim(qq))
-        }
-        $('div.comment-user-avatar img').attr('src', 'https://q2.qlogo.cn/headimg_dl?dst_uin=' + qq + '&spec=100')
-        is_get_by_qq = true
-        $('input#qq').val($.trim(qq))
-        if ($('input#qq').val()) {
-          $('.qq-check').css('display', 'block')
-          $('.gravatar-check').css('display', 'none')
-        }
-        //setCookie('user_author', data[qq][6], 30)
-       // setCookie('user_qq', qq, 30)
-        //setCookie('is_user_qq', 'yes', 30)
-        //setCookie('user_qq_email', qq + '@qq.com', 30)
-        //setCookie('user_email', qq + '@qq.com', 30)
-        emailAddressFlag = $('input#email').val()
-      }, error: function () {
-        if (qq_test.test(qq)) {
-          addComment.createButterbar('QQ号不存在（建议不要使用纯数字昵称）')
-        }
-        $('input#qq').val('')
-        $('.qq-check').css('display', 'none')
-        $('.gravatar-check').css('display', 'block')
-        $('div.comment-user-avatar img').attr('src', get_gravatar($('input#email').val(), 80))
-        //setCookie('user_qq', '', 30)
-        //setCookie('user_email', $('input#email').val(), 30)
-        //setCookie('user_avatar', get_gravatar($('input#email').val(), 80), 30)
-      }
-    })
-    $.ajax({
-      type: 'get',
-      url: mashiro_option.qq_avatar_api_url + '?type=getqqavatar&qq=' + qq,
-      dataType: 'jsonp',
-      jsonp: 'callback',
-      jsonpCallback: 'qqavatarCallBack',
-      beforeSend: function () {
-        if (qq_test.test(qq)) {
-          addComment.createButterbar('正在获取QQ头像...')
-        }
-      }, success: function (data) {
-        $('div.comment-user-avatar img').attr('src', data[qq])
-        addComment.createButterbar('QQ头像获取成功')
-        //setCookie('user_avatar', data[qq], 30)
-      }, error: function () {
-        if (qq_test.test(qq)) {
-          addComment.createButterbar('QQ号不存在（建议不要使用纯数字昵称）')
-        }
-        $('input#qq', 'input#email', 'input#url').val('')
-        if (!$('input#qq').val()) {
-          $('.qq-check').css('display', 'none')
-          $('.gravatar-check').css('display', 'block')
-          //setCookie('user_qq', '', 30)
-          $('div.comment-user-avatar img').attr('src', get_gravatar($('input#email').val(), 80))
-          //setCookie('user_avatar', get_gravatar($('input#email').val(), 80), 30)
-        }
-      }
-    })
-  })
-  if (getCookie('user_avatar') && getCookie('user_email') && getCookie('is_user_qq') == 'no' && !getCookie('user_qq_email')) {
-    $('div.comment-user-avatar img').attr('src', getCookie('user_avatar'))
-    $('input#email').val(getCookie('user_email'))
-    $('input#qq').val('')
-    if (!$('input#qq').val()) {
-      $('.qq-check').css('display', 'none')
-      $('.gravatar-check').css('display', 'block')
-    }
-  }
-  $('input#email').on('blur', function () {
-    var emailAddress = $('input#email').val()
-    if (is_get_by_qq == false || emailAddressFlag != emailAddress) {
-      $('div.comment-user-avatar img').attr('src', get_gravatar(emailAddress, 80))
-     // setCookie('user_avatar', get_gravatar(emailAddress, 80), 30)
-     // setCookie('user_email', emailAddress, 30)
-     // setCookie('user_qq_email', '', 30)
-     // setCookie('is_user_qq', 'no', 30)
-      $('input#qq').val('')
-      if (!$('input#qq').val()) {
-        $('.qq-check').css('display', 'none')
-        $('.gravatar-check').css('display', 'block')
-      }
-    }
-  })
-  if (getCookie('user_url')) {
-    $('input#url').val(getCookie('user_url'))
-  }
-  $('input#url').on('blur', function () {
-    var URL_Address = $('input#url').val()
-    $('input#url').val(URL_Address)
-    //setCookie('user_url', URL_Address, 30)
-  })
-  if (getCookie('user_author')) {
-    $('input#author').val(getCookie('user_author'))
-  }
-  $('input#author').on('blur', function () {
-    var user_name = $('input#author').val()
-    $('input#author').val(user_name)
-    //setCookie('user_author', user_name, 30)
-  })
-}
+
 
 function get_poem (poem_ele, info_ele) {
   var poem = document.querySelector(poem_ele)
@@ -938,23 +595,7 @@ function get_poem (poem_ele, info_ele) {
   xhr.send()
 }
 
-// function loadBotui() {
-//     if ($('div').hasClass('popcontainer')) {
-//         if (mashiro_global.variables.has_bot_ui) {
-//             bot_ui_ini();
-//         } else {
-//             $.getScript('https://fastly.jsdelivr.net/gh/moezx/cdn@latest/js/botui/botui.js', function () {
-//                 bot_ui_ini();
-//                 mashiro_global.variables.has_bot_ui = true;
-//             });
-//         }
-//     }
-// }
 
-function mail_me () {
-  var mail = 'mailto:' + mashiro_option.email_name + '@' + mashiro_option.email_domain
-  window.open(mail)
-}
 
 function hearthstone_deck_iframe () {
   if ($('iframe').hasClass('hearthstone-deck')) {
@@ -969,28 +610,7 @@ function hearthstone_deck_iframe () {
 }
 var currentFontIsUbuntu = true
 
-// function changeFont() {
-//     if (currentFontIsUbuntu) {
-//         loadCSS("https://fastly.jsdelivr.net/gh/moezx/cdn@3.1.8/css/cn.css");
-//         currentFontIsUbuntu = false;
-//     } else {
-//         loadCSS("https://fastly.jsdelivr.net/gh/moezx/cdn@3.1.8/css/or.css");
-//         currentFontIsUbuntu = true;
-//     }
-// }
 
-// function convertChinese(zh) {
-//     if (zh == 'cn') {
-//         $("#zh_cn").css("display", "none");
-//         $("#zh_tw").css("display", "inline-block");
-//         loadCSS("https://fastly.jsdelivr.net/gh/moezx/cdn@3.1.8/css/tw.css");
-//     }
-//     if (zh == 'tw') {
-//         $("#zh_tw").css("display", "none");
-//         $("#zh_cn").css("display", "inline-block");
-//         loadCSS("https://fastly.jsdelivr.net/gh/moezx/cdn@3.1.8/css/cn.css");
-//     }
-// }
 mashiro_global.ini.normalize()
 
 
@@ -1033,19 +653,6 @@ var home = location.href,
             $('.toc').removeClass('toc-fixed')
           }
         }
-        //$.getScript('//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js');
-      }
-    },
-    VA: function () {
-      if (!valine) {
-        var valine = new Valine()
-        valine.init({
-          el: '#vcomments',
-          appId: mashiro_option.v_appId,
-          appKey: mashiro_option.v_appKey,
-          path: window.location.pathname,
-          placeholder: '你是我一生只会遇见一次的惊喜 ...'
-        })
       }
     },
     MJ: function () {
@@ -1084,15 +691,7 @@ var home = location.href,
       })
       $('#banner_wave_1').addClass('banner_wave_hide')
       $('#banner_wave_2').addClass('banner_wave_hide')
-            // for (var i = 0; i < ap.length; i++) {
-            //     try {
-            //         ap[i].destroy()
-            //     } catch (e) {}
-            // }
-            // try {
-            //     hermitInit()
-            // } catch (e) {}
-      s.play()
+      if (s) s.play()
     }, spause: function () {
       $('#video-btn').addClass('video-play').removeClass('video-pause')
       $('.focusinfo').css({
@@ -1100,15 +699,15 @@ var home = location.href,
       })
       $('#banner_wave_1').removeClass('banner_wave_hide')
       $('#banner_wave_2').removeClass('banner_wave_hide')
-      s.pause()
+      if (s) s.pause()
     }, liveplay: function () {
-      if (s.oncanplay != undefined && $('.haslive').length > 0) {
+      if (s && s.oncanplay != undefined && $('.haslive').length > 0) {
         if ($('.videolive').length > 0) {
           Siren.splay()
         }
       }
     }, livepause: function () {
-      if (s.oncanplay != undefined && $('.haslive').length > 0) {
+      if (s && s.oncanplay != undefined && $('.haslive').length > 0) {
         Siren.spause()
         $('.video-stu').css({
           'bottom': '0px'
@@ -1123,6 +722,7 @@ var home = location.href,
       $('#bgvideo').attr('src', Poi.movies.url + '/' + _t)
       $('#bgvideo').attr('video-name', _t)
     }, LV: function () {
+      if (!s) return;
       var _btn = $('#video-btn')
       _btn.on('click', function () {
         if ($(this).hasClass('loadvideo')) {
@@ -1188,12 +788,6 @@ var home = location.href,
           Siren.livepause()
         }
     }, CE: function () {
-      $('.comments-hidden').show()
-      $('.comments-main').hide()
-      $('.comments-hidden').click(function () {
-        $('.comments-main').slideDown(500)
-        $('.comments-hidden').hide()
-      })
       $('.archives').hide()
       $('.archives:first').show()
       $('#archives-temp h3').click(function () {
@@ -1276,98 +870,7 @@ var home = location.href,
         return false
       })
     }, XCS: function () {
-      var __cancel = jQuery('#cancel-comment-reply-link'),
-        __cancel_text = __cancel.text(),
-        __list = 'commentwrap'
-      jQuery(document).on('submit', '#commentform', function () {
-        jQuery.ajax({
-          url: Poi.ajaxurl,
-          data: jQuery(this).serialize() + '&action=ajax_comment',
-          type: jQuery(this).attr('method'),
-          beforeSend: addComment.createButterbar('提交中(Commiting)....'),
-          error: function (request) {
-            var t = addComment
-            t.createButterbar(request.responseText)
-          }, success: function (data) {
-            jQuery('textarea').each(function () {
-                this.value = ''
-              })
-            var t = addComment,
-                cancel = t.I('cancel-comment-reply-link'),
-                temp = t.I('wp-temp-form-div'),
-                respond = t.I(t.respondId),
-                post = t.I('comment_post_ID').value,
-                parent = t.I('comment_parent').value
-            if (parent != '0') {
-                jQuery('#respond').before('<ol class="children">' + data + '</ol>')
-              } else if (!jQuery('.' + __list).length) {
-                  if (Poi.formpostion == 'bottom') {
-                    jQuery('#respond').before('<ol class="' + __list + '">' + data + '</ol>')
-                  } else {
-                    jQuery('#respond').after('<ol class="' + __list + '">' + data + '</ol>')
-                  }
-                } else {
-                  if (Poi.order == 'asc') {
-                    jQuery('.' + __list).append(data)
-                  } else {
-                    jQuery('.' + __list).prepend(data)
-                  }
-                }
-            t.createButterbar('提交成功(Succeed)')
-            lazyload()
-            code_highlight_style()
-            click_to_view_image()
-            clean_upload_images()
-            cancel.style.display = 'none'
-            cancel.onclick = null
-            t.I('comment_parent').value = '0'
-            if (temp && respond) {
-                temp.parentNode.insertBefore(respond, temp)
-                temp.parentNode.removeChild(temp)
-              }
-          }
-        })
-        return false
-      })
-      addComment = {
-        moveForm: function (commId, parentId, respondId) {
-          var t = this,
-            div, comm = t.I(commId),
-            respond = t.I(respondId),
-            cancel = t.I('cancel-comment-reply-link'),
-            parent = t.I('comment_parent'),
-            post = t.I('comment_post_ID')
-          __cancel.text(__cancel_text)
-          t.respondId = respondId
-          if (!t.I('wp-temp-form-div')) {
-            div = document.createElement('div')
-            div.id = 'wp-temp-form-div'
-            div.style.display = 'none'
-            respond.parentNode.insertBefore(div, respond)
-          }!comm ? (temp = t.I('wp-temp-form-div'), t.I('comment_parent').value = '0', temp.parentNode.insertBefore(respond, temp), temp.parentNode.removeChild(temp)) : comm.parentNode.insertBefore(respond, comm.nextSibling)
-          jQuery('body').animate({
-            scrollTop: jQuery('#respond').offset().top - 180
-          }, 400)
-          parent.value = parentId
-          cancel.style.display = ''
-          cancel.onclick = function () {
-            var t = addComment,
-              temp = t.I('wp-temp-form-div'),
-              respond = t.I(t.respondId)
-            t.I('comment_parent').value = '0'
-            if (temp && respond) {
-              temp.parentNode.insertBefore(respond, temp)
-              temp.parentNode.removeChild(temp)
-            }
-            this.style.display = 'none'
-            this.onclick = null
-            return false
-          }
-          try {
-            t.I('comment').focus()
-          } catch (e) {}
-          return false
-        }, I: function (e) {
+      addComment = { I: function (e) {
           return document.getElementById(e)
         }, clearButterbar: function (e) {
           if (jQuery('.butterBar').length > 0) {
@@ -1384,37 +887,6 @@ var home = location.href,
               }
           }
       }
-    }, XCP: function () {
-      $body = (window.opera) ? (document.compatMode == 'CSS1Compat' ? $('html') : $('body')) : $('html,body')
-      $('body').on('click', '#comments-navi a', function (e) {
-        e.preventDefault()
-        $.ajax({
-          type: 'GET',
-          url: $(this).attr('href'),
-          beforeSend: function () {
-            $('#comments-navi').remove()
-            $('ul.commentwrap').remove()
-            $('#loading-comments').slideDown()
-            $body.animate({
-                scrollTop: $('#comments-list-title').offset().top - 65
-              }, 800)
-          }, dataType: 'html',
-          success: function (out) {
-            result = $(out).find('ul.commentwrap')
-            nextlink = $(out).find('#comments-navi')
-            $('#loading-comments').slideUp('fast')
-            $('#loading-comments').after(result.fadeIn(500))
-            $('ul.commentwrap').after(nextlink)
-            lazyload()
-            code_highlight_style()
-            click_to_view_image()
-          }
-        })
-      })
-    }, IA: function () {
-      //POWERMODE.colorful = true
-     // POWERMODE.shake = false
-      //document.body.addEventListener('input', POWERMODE)
     }, GT: function () {
       var offset = 100,
         offset_opacity = 1200,
@@ -1885,10 +1357,8 @@ $(function () {
   Siren.GT()
   Siren.XLS()
   Siren.XCS()
-  Siren.XCP()
   Siren.CE()
   Siren.MN()
-  Siren.IA()
   Siren.LV()
   Siren.BTV()
   Siren.SAY()
@@ -1906,11 +1376,8 @@ $(function () {
       Siren.AH()
       Siren.PE()
       Siren.CE()
-      //Siren.VA()
       Siren.MJ()
-      //Siren.AB()
       Siren.TOC()
-      //Siren.BSZ()
       Siren.BTV()
       Siren.SAY()
       if (mashiro_option.NProgressON) NProgress.done()
@@ -1919,13 +1386,6 @@ $(function () {
       if (Poi.codelamp == 'open') {
         self.Prism.highlightAll(event)
       };
-      if ($('.ds-thread').length > 0) {
-        if (typeof DUOSHUO !== 'undefined') {
-          DUOSHUO.EmbedThread('.ds-thread')
-        } else {
-          $.getScript('//static.duoshuo.com/embed.js')
-        }
-      }
     }).on('submit', '.search-form,.s-search', function (event) {
       event.preventDefault()
       $.pjax.submit(event, '#main-container', {
@@ -1997,11 +1457,7 @@ if ((isWebkit || isOpera || isIe) && document.getElementById && window.addEventL
     }
   }, false)
 }
-// loadCSS(mashiro_option.jsdelivr_css_src);
-// loadCSS("https://at.alicdn.com/t/font_679578_dishi1yoavm.css");
-// loadCSS("https://fastly.jsdelivr.net/gh/moezx/cdn@3.5.4/fonts/Moe-Mashiro/stylesheet.css");
-// loadCSS("https://fonts.googleapis.com/css?family=Noto+SerifMerriweather|Merriweather+Sans|Source+Code+Pro|Ubuntu:400,700");
-// loadCSS("https://fastly.jsdelivr.net/gh/moezx/cdn@3.3.9/css/sharejs.css");;
+
 
 function render (template, context) {
   var tokenReg = /(\\)?\{([^\{\}\\]+)(\\)?\}/g
@@ -2034,102 +1490,3 @@ $(document).ready(function () {
   }, 0)
 })
 
-// function aplayerF() {
-//     'use strict';
-//     var aplayers = [],
-//         loadMeting = function () {
-//             function a(a, b) {
-//                 var c = {
-//                     container: a,
-//                     audio: b,
-//                     mini: null,
-//                     fixed: null,
-//                     autoplay: !1,
-//                     mutex: !0,
-//                     lrcType: 3,
-//                     listFolded: !1,
-//                     preload: 'auto',
-//                     theme: '#2980b9',
-//                     loop: 'all',
-//                     order: 'list',
-//                     volume: null,
-//                     listMaxHeight: null,
-//                     customAudioType: null,
-//                     storageName: 'metingjs'
-//                 };
-//                 if (b.length) {
-//                     b[0].lrc || (c.lrcType = 0);
-//                     var d = {};
-//                     for (var e in c) {
-//                         var f = e.toLowerCase();
-//                         (a.dataset.hasOwnProperty(f) || a.dataset.hasOwnProperty(e) || null !== c[e]) && (d[e] = a.dataset[f] || a.dataset[e] || c[e], ('true' === d[e] || 'false' === d[e]) && (d[e] = 'true' == d[e]))
-//                     }
-//                     aplayers.push(new APlayer(d))
-//                 }
-//                 for (var f = 0; f < aplayers.length; f++) try {
-//                     aplayers[f].lrc.hide();
-//                 } catch (a) {
-//                     console.log(a)
-//                 }
-//                 var lrcTag = 1;
-//                 $(".aplayer.aplayer-fixed").click(function () {
-//                     if (lrcTag == 1) {
-//                         for (var f = 0; f < aplayers.length; f++) try {
-//                             aplayers[f].lrc.show();
-//                         } catch (a) {
-//                             console.log(a)
-//                         }
-//                     }
-//                     lrcTag = 2;
-//                 });
-//                 var apSwitchTag = 0;
-//                 $(".aplayer.aplayer-fixed .aplayer-body").addClass("ap-hover");
-//                 $(".aplayer-miniswitcher").click(function () {
-//                     if (apSwitchTag == 0) {
-//                         $(".aplayer.aplayer-fixed .aplayer-body").removeClass("ap-hover");
-//                         apSwitchTag = 1;
-//                     } else {
-//                         $(".aplayer.aplayer-fixed .aplayer-body").addClass("ap-hover");
-//                         apSwitchTag = 0;
-//                     }
-//                 });
-//             }
-//             var b = 'https://api.i-meto.com/meting/api?server=:server&type=:type&id=:id&r=:r';
-//             'undefined' != typeof meting_api && (b = meting_api);
-//             for (var f = 0; f < aplayers.length; f++) try {
-//                 aplayers[f].destroy()
-//             } catch (a) {
-//                 console.log(a)
-//             }
-//             aplayers = [];
-//             for (var c = document.querySelectorAll('.aplayer'), d = function () {
-//                 var d = c[e],
-//                     f = d.dataset.id;
-//                 if (f) {
-//                     var g = d.dataset.api || b;
-//                     g = g.replace(':server', d.dataset.server), g = g.replace(':type', d.dataset.type), g = g.replace(':id', d.dataset.id), g = g.replace(':auth', d.dataset.auth), g = g.replace(':r', Math.random());
-//                     var h = new XMLHttpRequest;
-//                     h.onreadystatechange = function () {
-//                         if (4 === h.readyState && (200 <= h.status && 300 > h.status || 304 === h.status)) {
-//                             var b = JSON.parse(h.responseText);
-//                             a(d, b)
-//                         }
-//                     }, h.open('get', g, !0), h.send(null)
-//                 } else if (d.dataset.url) {
-//                     var i = [{
-//                         name: d.dataset.name || d.dataset.title || 'Audio name',
-//                         artist: d.dataset.artist || d.dataset.author || 'Audio artist',
-//                         url: d.dataset.url,
-//                         cover: d.dataset.cover || d.dataset.pic,
-//                         lrc: d.dataset.lrc,
-//                         type: d.dataset.type || 'auto'
-//                     }];
-//                     a(d, i)
-//                 }
-//             }, e = 0; e < c.length; e++) d()
-//         };
-//     document.addEventListener('DOMContentLoaded', loadMeting, !1);
-// }
-// if (document.body.clientWidth > 860) {
-//     aplayerF();
-// }
