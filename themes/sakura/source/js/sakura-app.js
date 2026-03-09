@@ -299,12 +299,6 @@ if (document.body.clientWidth > 860) {
   checkBgImgCookie()
 }
 
-
-if (mashiro_global.variables.isNight) {
-  $('.changeSkin-gear, .toc').css('background', 'rgba(255,255,255,0.8)')
-} else {
-  $('.changeSkin-gear, .toc').css('background', 'none')
-}
 $(document).ready(function () {
   function changeBG (tagid, url) {
     $('.skin-menu ' + tagid).click(function () {
@@ -371,11 +365,6 @@ $(document).ready(function () {
     setTimeout(function () {
       $('.changeSkin-gear').css('visibility', 'visible')
     }, 300)
-    if (mashiro_global.variables.isNight) {
-      $('.changeSkin-gear, .toc').css('background', 'rgba(255,255,255,0.8)')
-    } else {
-      $('.changeSkin-gear, .toc').css('background', 'none')
-    }
   }
   $('.changeSkin-gear').click(function () {
     $('.skin-menu').toggleClass('show')
@@ -514,7 +503,6 @@ var pjaxInit = function () {
     $('.headertop-bar').removeClass('headertop-bar').addClass('headertop-bar-sakura')
     if (mashiro_global.variables.isNight) {
       $('.blank').css('background-color', 'rgba(255,255,255,1)')
-      $('.toc').css('background-color', 'rgba(255,255,255,0.8)')
     }
   }
   $('.iconflat').css('width', '50px').css('height', '50px')

@@ -33,8 +33,6 @@
   <div id="primary" class="content-area">
     <main id="main" class="site-main" role="main">
       <article id="post-1" class="post-1 post type-post status-publish format-standard has-post-thumbnail hentry category-uncategorized">
-        <div class="toc"></div>
-        <!--<div class="toc-entry-content"><!-- 套嵌目录使用（主要为了支援评论）-->
         {% if not post.photos[0] %}
           <header class="entry-header">
             <h1 class="entry-title">{{ post.title }}</h1>
@@ -68,15 +66,6 @@
           <div class="post-lincenses"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow"><i class="fa fa-creative-commons" aria-hidden="true"></i> 知识共享署名 - 非商业性使用 - 相同方式共享 4.0 国际许可协议</a></div>
           <div class="post-tags">
           </div>#}
-
-          {##分享
-          <div class="post-share">
-            <div class="social-share sharehidden share-component"></div>
-            <i class="iconfont show-share icon-forward"></i>
-          </div>#}
-
-
-
 
 <a class="post-license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh_CN" target="_blank" rel="nofollow" title="此文章遵守 CC BY-NC-SA 4.0 知识共享许可协议">
                 <i class="fa-brands fa-creative-commons"></i>
@@ -115,22 +104,9 @@
               {%- endif %}  
 
 
-
-
-
-
-
-
-
-
-
-
-
-
         </footer><!-- .entry-footer -->
       </article>
-      <!-- #post-## -->
-      <div class="toc" style="background: none;"></div>
+       <div class="toc"></div>
       <section class="post-squares nextprev">
         {% if post.prev %}
           {% if post.next %}

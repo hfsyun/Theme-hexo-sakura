@@ -52,12 +52,12 @@ imgError: https://fastly.jsdelivr.net/gh/honjun/cdn@1.6/img/other/image-404.png
 menus:
   首页: { path: /, fa: fa-fort-awesome faa-shake }
   归档: { path: /archives, fa: fa-archive faa-shake }
-  #清单: { path: javascript:;, fa: fa-list-ul faa-vertical, submenus: { 
-    #书单: {path: /tags/悦读/, fa: fa-th-list faa-bounce }, 
-    #番组: {path: /bangumi/, fa: fa-film faa-vertical }, 
-    #歌单: {path: /music/, fa: fa-headphones },
-    #图集: {path: /tags/图集/, fa: fa-photo }
-  #} }
+  清单: { path: javascript:;, fa: fa-list-ul faa-vertical, submenus: { 
+    书单: {path: /tags/悦读/, fa: fa-th-list faa-bounce }, 
+    番组: {path: /bangumi/, fa: fa-film faa-vertical }, 
+    歌单: {path: /music/, fa: fa-headphones },
+    图集: {path: /tags/图集/, fa: fa-photo }
+  } }
   番组: {path: /bangumi/, fa: fa-film faa-vertical }
   说说: {path: /say/, fa: fa-comment-o faa-shake }
   留言板: { path: /comment/, fa: fa-pencil-square-o faa-tada }
