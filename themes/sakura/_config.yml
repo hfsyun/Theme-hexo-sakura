@@ -151,7 +151,7 @@ Say:
   supabaseAnonKey: sb_publishable_5f4MIi1dkc6n5peShJVM-w_cSGeZrgs
   pageSize: 10
   loadImg: https://fastly.jsdelivr.net/gh/hfsyun/cdn@3.5/loading/loading.svg 
-  js: /js/Say3.min.js #https://fastly.jsdelivr.net/gh/hfsyun/cdn@55992f8/js/Say3.min.js
+  js: /js/Say.min.js #https://fastly.jsdelivr.net/gh/hfsyun/cdn@55992f8/js/Say3.min.js
 
 
 # Valine
